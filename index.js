@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const path = require("path");
 const configRoutes = require("./src/routes/configRouter");
 require("dotenv").config();
 
@@ -10,8 +11,8 @@ app.use(cors());
 app.use(bodyParser.json());
 
 const PORT = process.env.PORT || 3000;
-app.get("/", (res) => {
-  res.sendFile(path.join(__dirname, "index.html"));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname,  'index.html'));
 });
 app.use("/api/configs", configRoutes);
 
