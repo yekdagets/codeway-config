@@ -10,7 +10,9 @@ app.use(cors());
 app.use(bodyParser.json());
 
 const PORT = process.env.PORT || 3000;
-
+app.get("/", (res) => {
+  res.sendFile(path.join(__dirname, "index.html"));
+});
 app.use("/api/configs", configRoutes);
 
 app.listen(PORT, () => {
