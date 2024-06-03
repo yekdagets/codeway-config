@@ -1,8 +1,8 @@
-const admin = require("../firebaseAdmin");
+import admin from "../firebaseAdmin.js";
 const db = admin.firestore();
-const { getCache, setCache, invalidateCache } = require("../utils/cache");
+import { getCache, setCache, invalidateCache } from "../utils/cache.js";
 
-const getAllConfigs = async (req, res) => {
+export const getAllConfigs = async (req, res) => {
   const { country } = req.query;
 
   try {
@@ -60,7 +60,7 @@ const getAllConfigs = async (req, res) => {
   }
 };
 
-const addConfig = async (req, res) => {
+export const addConfig = async (req, res) => {
   const { key, value, description } = req.body;
   try {
     const newConfig = {
@@ -80,7 +80,7 @@ const addConfig = async (req, res) => {
   }
 };
 
-const updateConfig = async (req, res) => {
+export const updateConfig = async (req, res) => {
   const { id } = req.params;
   const { key, value, description, country, countrySpecific, version } =
     req.body;
@@ -130,7 +130,7 @@ const updateConfig = async (req, res) => {
   }
 };
 
-const deleteConfig = async (req, res) => {
+export const deleteConfig = async (req, res) => {
   const { id } = req.params;
   const { country } = req.query;
   try {
@@ -156,11 +156,4 @@ const deleteConfig = async (req, res) => {
   } catch (error) {
     res.status(500).send("Error deleting configuration");
   }
-};
-
-module.exports = {
-  getAllConfigs,
-  addConfig,
-  updateConfig,
-  deleteConfig,
 };

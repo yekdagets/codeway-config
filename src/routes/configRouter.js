@@ -1,17 +1,18 @@
-const express = require("express");
-const {
+import express from "express";
+import {
   getAllConfigs,
   addConfig,
   updateConfig,
   deleteConfig,
-} = require("../controllers/configController");
-const checkAuth = require("../middleware/authMiddleware");
+} from "../controllers/configController.js";
+
+import { checkIdToken, checkApiKey } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-router.get("/", checkAuth, getAllConfigs);
-router.post("/", checkAuth, addConfig);
-router.put("/:id", checkAuth, updateConfig);
-router.delete("/:id", checkAuth, deleteConfig);
+router.get("/", checkApiKey, getAllConfigs);
+router.post("/", checkIdToken, addConfig);
+router.put("/:id", checkIdToken, updateConfig);
+router.delete("/:id", checkIdToken, deleteConfig);
 
-module.exports = router;
+export default router;

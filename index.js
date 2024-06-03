@@ -1,9 +1,10 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const cors = require("cors");
-const path = require("path");
-const configRoutes = require("./src/routes/configRouter");
-require("dotenv").config();
+import express from "express";
+import bodyParser from "body-parser";
+import cors from "cors";
+import path from "path";
+import configRoutes from "./src/routes/configRouter.js";
+import dotenv from "dotenv";
+dotenv.config();
 
 const app = express();
 

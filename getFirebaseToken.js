@@ -1,6 +1,7 @@
-require('dotenv').config();
-const { initializeApp } = require('firebase/app');
-const { getAuth, signInWithEmailAndPassword } = require('firebase/auth');
+import dotenv from "dotenv";
+dotenv.config();
+import { initializeApp } from 'firebase/app';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 
 const firebaseConfig = {
   apiKey: process.env.FIREBASE_API_KEY,
@@ -14,8 +15,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-const email = 'yekta@codeway.init';
-const password = 'test123';
+
 
 signInWithEmailAndPassword(auth, email, password)
   .then((userCredential) => {
