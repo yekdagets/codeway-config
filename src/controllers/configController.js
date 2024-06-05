@@ -60,6 +60,28 @@ export const getAllConfigs = async (req, res) => {
   }
 };
 
+export const getAllConfigsMobile = async (req, res) => {
+  try {
+    const configsSnapshot = await db.collection("configs").orderBy("key").get();
+    const configs = configsSnapshot.docs.map((doc) => {
+      const data = doc.data();
+      return {
+        key: data.key,
+        value: data.value,
+      };
+    });
+
+    const orderedConfigs = {};
+    configs.forEach((config) => {
+      orderedConfigs[config.key] = config.value;
+    });
+
+    res.status(200).json(orderedConfigs);
+  } catch (error) {
+    res.status(500).send("Error getting mobile configurations");
+  }
+};
+
 export const addConfig = async (req, res) => {
   const { key, value, description } = req.body;
   try {
